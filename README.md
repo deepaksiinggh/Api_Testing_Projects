@@ -2,5 +2,5 @@
 
 ## 📌 Postman Documentation Links
 
-- [Pet Store User](https://documenter.getpostman.com/view/30362899/2sBXcAGHdi)
+- [Pet Store User](https://documenter.getpostman.com/view/30362899/2sBXcAGhdi)
 - [Pet Store Pet](https://documenter.getpostman.com/view/30362899/2sBXcAH2f4)
