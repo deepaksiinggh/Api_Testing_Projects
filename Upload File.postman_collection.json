@@ -1,0 +1,82 @@
+{
+  "info": {
+    "_postman_id": "feae30d6-90d5-4a66-81aa-f839624d0747",
+    "name": "Upload File",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "30362899",
+    "_collection_link": "https://go.postman.co/collection/30362899-feae30d6-90d5-4a66-81aa-f839624d0747?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "single File",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "file",
+              "type": "file",
+              "uuid": "20e85b01-6b49-415d-bbab-03eff40b5ac4",
+              "src": "postman-cloud:///1f105760-9f69-41f0-9d03-46029b771768"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:8080/uploadFile",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "uploadFile"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "multiple File",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "files",
+              "type": "file",
+              "uuid": "a02a3392-773b-4882-a377-9d687feed6ce",
+              "src": [
+                "postman-cloud:///1f105763-687b-4820-bc81-779478705557",
+                "postman-cloud:///1f105760-9f69-41f0-9d03-46029b771768"
+              ]
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:8080/uploadMultipleFiles",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "uploadMultipleFiles"
+          ],
+          "query": [
+            {
+              "key": "",
+              "value": null,
+              "type": "text",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

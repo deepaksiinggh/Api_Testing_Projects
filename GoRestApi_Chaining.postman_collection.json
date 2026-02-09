@@ -1,0 +1,274 @@
+{
+  "info": {
+    "_postman_id": "52c65dac-6303-47fa-aac8-561967c5e597",
+    "name": "GoRestApi_Chaining",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "30362899",
+    "_collection_link": "https://go.postman.co/collection/30362899-52c65dac-6303-47fa-aac8-561967c5e597?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "create_User",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "let random = Math.random().toString(36).substring(4);\r",
+              "\r",
+              "let name = \"mohit\"+random;\r",
+              "let email =\"mohit\"+random+\"@gmail.com\";\r",
+              "\r",
+              "pm.environment.set(\"name\", name);\r",
+              "pm.environment.set(\"email\", email);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "\r",
+              "let data = pm.response.json();\r",
+              "\r",
+              "pm.environment.set(\"userId\", data.id);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"{{name}}\",\r\n  \"email\": \"{{email}}\",\r\n  \"gender\": \"male\",\r\n  \"status\": \"inactive\"\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{gorest_Url}}/public/v2/users",
+          "host": [
+            "{{gorest_Url}}"
+          ],
+          "path": [
+            "public",
+            "v2",
+            "users"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get All users",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": " {\r\n    \"name\": \"Goswamee Ahujas\",\r\n    \"email\": \"ahuja_goswamee@sanfordss.test\",\r\n    \"gender\": \"male\",\r\n    \"status\": \"inactive\"\r\n  }"
+        },
+        "url": {
+          "raw": "{{gorest_Url}}/public/v2/users",
+          "host": [
+            "{{gorest_Url}}"
+          ],
+          "path": [
+            "public",
+            "v2",
+            "users"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get Single Users",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"values of json field\", () => {\r",
+              "    let data = pm.response.json();\r",
+              "\r",
+              "    pm.expect(data.id).to.eql(pm.environment.get(\"userId\"));\r",
+              "    pm.expect(data.name).to.eql(pm.environment.get(\"name\"));\r",
+              "    pm.expect(data.email).to.eql(pm.environment.get(\"email\"));\r",
+              "});\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{gorest_Url}}/public/v2/users/{{userId}}",
+          "host": [
+            "{{gorest_Url}}"
+          ],
+          "path": [
+            "public",
+            "v2",
+            "users",
+            "{{userId}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "update All field user",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": " {\r\n    \"name\": \"{{name}}\",\r\n    \"email\": \"{{email}}\",\r\n    \"gender\": \"male\",\r\n    \"status\": \"inactive\"\r\n  }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{gorest_Url}}/public/v2/users/{{userId}}",
+          "host": [
+            "{{gorest_Url}}"
+          ],
+          "path": [
+            "public",
+            "v2",
+            "users",
+            "{{userId}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "update some field user",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": " {\r\n  \r\n    \"gender\": \"female\"\r\n    \r\n  }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{gorest_Url}}/public/v2/users/{{userId}}",
+          "host": [
+            "{{gorest_Url}}"
+          ],
+          "path": [
+            "public",
+            "v2",
+            "users",
+            "{{userId}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "delete user",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.environment.unset(\"userId\");\r",
+              "pm.environment.unset(\"name\");\r",
+              "pm.environment.unset(\"email\");"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": " {\r\n  \r\n    \"email\": \"ahuja_goswamee@sanfordss.test\",\r\n    \"gender\": \"female\"\r\n    \r\n  }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{gorest_Url}}/public/v2/users/{{userId}}",
+          "host": [
+            "{{gorest_Url}}"
+          ],
+          "path": [
+            "public",
+            "v2",
+            "users",
+            "{{userId}}"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "ddf74a83a0ea8a38330ef81b9bebb40d255b7f5830ccff4b0357694eaeded3be",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ]
+}
